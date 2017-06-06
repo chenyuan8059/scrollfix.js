@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>scrollfix.js</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+    <script src="../js/scrollfix.js"></script>
+    <script>
+        window.onload = function(){
+            var div = document.querySelectorAll('div');
+            for (var i = 0; i < div.length; i++) {
+                div[i].style.background = randomColor();
+                div[i].innerText = i;
+            }
+            var sf = new ScrollFix('#fixed',{
+                top: 0,
+                start: +(function(){
+                        // var start = document.querySelector('#start');
+                        // return start.offsetHeight + start.offsetTop;
+                    }),
+                container: window,
+                hold_palce: true,
+                auto_stop: true,
+            });
+        }
+        function randomColor(){
+            return  '#' + 
+            (function(color){   
+                return (color +=  '3456789abcdef'[Math.floor(Math.random()*13)]) && (color.length == 6) 
+                ?  color : arguments.callee(color);
+            })('');    
+        }
+    </script>
+</head>
+<body>
+    <div id="start"></div>
+    <div id="fixed"></div>
+    <div></div>
+    <p style="height: 1000px"></p>
+</body>
+</html>
